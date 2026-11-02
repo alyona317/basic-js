@@ -1,5 +1,3 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
 /**
  * Implement class VigenereCipheringMachine that allows us to create
  * direct and reverse ciphering machines according to task description
@@ -57,5 +55,7 @@ class VigenereCipheringMachine {
 }
 
 module.exports = {
-  VigenereCipheringMachine
+  directMachine: new VigenereCipheringMachine(),
+  reverseMachine: new VigenereCipheringMachine(false),
+  VigenereCipheringMachine,
 };
