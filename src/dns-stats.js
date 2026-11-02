@@ -26,10 +26,10 @@ function getDNSStats(domains) {
 
   let result ={};
   domains.forEach(domain => {
-    let spltDomain=domain.split('.');
+    let spltDomain=domain.split('.').reverse();
     let currentDomain = ''
     for (let i=0;i<spltDomain.length; i++){
-      currentDomain += (i === 0 ? '' : '.') + spltDomain[i];
+      currentDomain += '.' + spltDomain[i];
       result[currentDomain] = (result[currentDomain] || 0) + 1;
 
     }

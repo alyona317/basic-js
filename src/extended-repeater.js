@@ -15,16 +15,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(str, options) {
+function repeater(str, options = {}) {
  // Преобразуем str и addition в строки, если это не так
  str = String(str);
  let addition = options.addition !== undefined ? String(options.addition) : '';
 
  // Устанавливаем значения по умолчанию
  const repeatTimes = options.repeatTimes || 1;
- const separator = options.separator || '+';
+ const separator = options.separator !== undefined ? options.separator : '+';
  const additionRepeatTimes = options.additionRepeatTimes || 1;
- const additionSeparator = options.additionSeparator || '|';
+ const additionSeparator = options.additionSeparator !== undefined ? options.additionSeparator : '|';
 
  // Генерируем повторение addition
  const additionPart = Array(additionRepeatTimes).fill(addition).join(additionSeparator);

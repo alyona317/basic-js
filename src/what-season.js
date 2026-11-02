@@ -13,21 +13,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getSeason(date) {
 // Проверка, если аргумент не передан
-if (!date) {
+if (date === undefined) {
   return 'Unable to determine the time of year!';
 }
 
-// Проверка на корректность объекта Date
-if (
-  !(date instanceof Date) || // Проверка, является ли объект экземпляром Date
-  Object.getOwnPropertyNames(date).length > 0 || // Проверка на фальшивые объекты Date
-  isNaN(date.getTime()) // Проверка на валидность даты
-) {
+// Настоящий метод Date.prototype сработает только на настоящей дате:
+// для фальшивого объекта он выбросит TypeError, сколько бы методов тот ни подделал
+let month;
+try {
+  if (isNaN(Date.prototype.getTime.call(date))) {
+    throw new Error('Invalid time value');
+  }
+  // Получение месяца из даты (0-based индекс)
+  month = Date.prototype.getMonth.call(date);
+} catch (err) {
   throw new Error('Invalid date!');
 }
-
-// Получение месяца из даты (0-based индекс)
-const month = date.getMonth();
 
 // Определение времени года на основе месяца
 if (month >= 2 && month <= 4) {

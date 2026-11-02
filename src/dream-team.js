@@ -17,7 +17,7 @@ function createDreamTeam(members) {
   if (!Array.isArray(members)) {
     return false;
   }
-  let teamName = members.filter(member => typeof member === 'string').map(member => member.trim()[0].toUpperCase()).sort().join('');
+  let teamName = members.filter(member => typeof member === 'string' && member.trim() !== '').map(member => member.trim()[0].toUpperCase()).sort().join('');
 
 // Если команда не пустая, возвращаем название, иначе false
 return teamName.length > 0 ? teamName : false;

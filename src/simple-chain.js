@@ -12,7 +12,8 @@ const chainMaker = {
   },
 
   addLink(value) {
-    this.chain.push(`( ${value} )`);
+    // Called with no arguments, it adds an empty link
+    this.chain.push(arguments.length === 0 ? '(  )' : `( ${value} )`);
     return this; // Enables chaining
   },
 

@@ -13,17 +13,20 @@ const HALF_LIFE_PERIOD = 5730;
  *
  * @example
  * 
- * dateSample('1') => 22387
+ * dateSample('1') => 22392 (22387 if Math.LN2 is used instead of 0.693)
  * dateSample('WOOT!') => false
  *
  */
 function dateSample(sampleActivity) {
-  const number = parseFloat(sampleActivity)
-  if (typeof number !== 'string' || isNaN(number) || number <= 0 || number >= MODERN_ACTIVITY){
+  if (typeof sampleActivity !== 'string') {
+    return false;
+  }
+  const number = Number(sampleActivity);
+  if (isNaN(number) || number <= 0 || number >= MODERN_ACTIVITY) {
     return false;
   }
   const age = Math.log(MODERN_ACTIVITY / number) / (0.693 / HALF_LIFE_PERIOD);
-  return Math.round(age);
+  return Math.ceil(age);
 }
 
 module.exports = {
